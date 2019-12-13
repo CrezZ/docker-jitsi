@@ -11,6 +11,12 @@ to run Jitsi Meet in a single Docker container. Only exception is the
 STUN server, that you might want to run separately or use a public STUN
 by any service provider.
 
+## Build local
+
+```
+docker build -t my-jitsi .
+```
+
 ## Running Jitsi Meet
 
 You may simply run Jitsi Meet in Docker :
@@ -18,7 +24,7 @@ You may simply run Jitsi Meet in Docker :
 ```
 docker run -i -t -d -p 80:80 -p 4443:4443 -p 10000:10000/udp \
   -e DOMAIN=jitsi.mydomain.com -e STUN=stun.myprovider.com \
-  -e BRIDGE_IP=1.2.3.4 tedomum/jitsi
+  -e BRIDGE_IP=1.2.3.4 crezz/jitsi-meet-2019
 ```
 
 Or use Docker Compose :
@@ -27,11 +33,15 @@ Or use Docker Compose :
 [...]
 services:
   jitsi:
-    image: tedomum/jitsi
+    image: crezz/jitsi-meet-2019
     ports:
       - 80:80
       - 4443:4443
       - 10000:10000/udp
+    environment:
+      - DOMAIN=mcu2.mydomain.com
+      - BRIDGE_IP=11.22.33.44
+      - STUN=stun4.l.google.com:19302
 ```
 
 ## Exposing the service
