@@ -1,5 +1,7 @@
 # Jitsi Meet
 
+forked from https://github.com/TeDomum/docker-jitsi for create new version
+
 Jitsi Meet is an audio/video conferencing software based on XMPP, Jitsi
 Videobridge and lots of great sofware, available at
 https://github.com/jitsi/jitsi-meet

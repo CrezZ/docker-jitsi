@@ -21,7 +21,7 @@ COPY config/prosody.cfg.lua /etc/prosody/prosody.cfg.lua
 
 COPY start.sh /start.sh
 
-ENV DOMAIN=test.com STUN=stun.test.com BRIDGE_IP=1.2.3.4 BRIDGE_TCP_PORT=4443 BRIDGE_UDP_PORT=10000
+ENV DOMAIN=test.com STUN=stun.l.google.com:19302 BRIDGE_IP=127.0.0.1 BRIDGE_TCP_PORT=4443 BRIDGE_UDP_PORT=10000
 
 EXPOSE 4443 10000/udp
 
