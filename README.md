@@ -31,7 +31,6 @@ You may simply run Jitsi Meet in Docker :
 
 ```
 docker run -i -t -d -p 80:80 -p 4443:4443 -p 10000:10000/udp \
-<<<<<<< HEAD
   -e DOMAIN=jitsi.mydomain.com -e STUN=stun.myprovider.com:19039 \
   -e BRIDGE_IP=1.2.3.4 crezz/docker-jitsi-2019
 ```
@@ -111,10 +110,8 @@ location /.well-known {
 
 }
 
-=======
   -e DOMAIN=jitsi.mydomain.com -e STUN=stun.myprovider.com \
   -e BRIDGE_IP=1.2.3.4 crezz/jitsi-meet-2019
->>>>>>> 3d9fc5c4e0c38b40914a9563ddc69b8c593fea34
 ```
 
 Or use Docker Compose :
@@ -123,11 +120,9 @@ Or use Docker Compose :
 [...]
 services:
   jitsi:
-<<<<<<< HEAD
     image: crezz/
-=======
     image: crezz/jitsi-meet-2019
->>>>>>> 3d9fc5c4e0c38b40914a9563ddc69b8c593fea34
+    image: crezz/jitsi-meet-2019
     ports:
       - 80:80
       - 4443:4443
