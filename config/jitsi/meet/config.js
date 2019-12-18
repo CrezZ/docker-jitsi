@@ -173,11 +173,11 @@ var config = {
     // fileRecordingsServiceSharingEnabled: false,
 
     // Whether to enable live streaming or not.
-    // liveStreamingEnabled: false,
+     liveStreamingEnabled: true,
 
     // Transcription (in interface_config,
     // subtitles and buttons can be configured)
-     transcribingEnabled: true,
+     transcribingEnabled: false,
 
     // Enables automatic turning on captions when recording is started
     // autoCaptionOnRecord: false,
@@ -231,7 +231,7 @@ var config = {
 
     // Whether to use a welcome page or not. In case it's false a random room
     // will be joined when no room is specified.
-    enableWelcomePage: true,
+    enableWelcomePage: false,
 
     // Enabling the close page will ignore the welcome page redirection when
     // a call is hangup.
@@ -241,15 +241,15 @@ var config = {
     // disable1On1Mode: false,
 
     // Default language for the user interface.
-    // defaultLanguage: 'en',
+     defaultLanguage: '{{ JS_LANG }}',
 
     // If true all users without a token will be considered guests and all users
     // with token will be considered non-guests. Only guests will be allowed to
     // edit their profile.
-    enableUserRolesBasedOnToken: false,
+    enableUserRolesBasedOnToken: {{ JS_ENABLE_TOKEN }},
 
     // Whether or not some features are checked based on token.
-    // enableFeaturesBasedOnToken: false,
+     enableFeaturesBasedOnToken: {{ JS_ENABLE_TOKEN }},
 
     // Enable lock room for all moderators, even when userRolesBasedOnToken is enabled and participants are guests.
     // lockRoomGuestEnabled: false,
@@ -292,11 +292,16 @@ var config = {
     // If third party requests are disabled, no other server will be contacted.
     // This means avatars will be locally generated and callstats integration
     // will not function.
-     disableThirdPartyRequests: true,
+     disableThirdPartyRequests: false,
 
 
     // Peer-To-Peer mode: used (if enabled) when there are just 2 participants.
     //
+        stunServers: [
+            { urls: 'stun:stun.l.google.com:19302' },
+            { urls: 'stun:stun1.l.google.com:19302' },
+            { urls: 'stun:stun2.l.google.com:19302' }
+        ],
 
     p2p: {
         // Enables peer to peer mode. When enabled the system will try to
@@ -305,7 +310,7 @@ var config = {
         // through the JVB and use the peer to peer connection instead. When a
         // 3rd participant joins the conference will be moved back to the JVB
         // connection.
-        enabled: true,
+        enabled: false,
 
         // Use XEP-0215 to fetch STUN and TURN servers.
         // useStunTurn: true,
@@ -373,7 +378,7 @@ var config = {
     //
 
     // The recording format, can be one of 'ogg', 'flac' or 'wav'.
-    //     format: 'flac'
+         format: 'wav'
     //
 
      },
@@ -403,7 +408,7 @@ var config = {
 
     // A property to disable the right click context menu for localVideo
     // the menu has option to flip the locally seen video for local presentations
-     disableLocalVideoFlip: true,
+     disableLocalVideoFlip: false,
 
     // Deployment specific URLs.
     // deploymentUrls: {

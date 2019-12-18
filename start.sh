@@ -18,6 +18,9 @@ for VARIABLE in `env | cut -f1 -d=`; do
 done
 
 /etc/init.d/prosody restart
+#hack prosody 11
+prosodyctl unregister focus 
+
 prosodyctl register focus "auth.$DOMAIN" $FOCUS_SECRET
 
 fi

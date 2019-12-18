@@ -1,6 +1,6 @@
 -- Prosody Configuration File
 
-admins = { "focus@auth.video.test.com" }
+admins = { "focus@auth.{{ DOMAIN }}" }
 modules_enabled = {
 	"roster"; -- Allow users to have a roster. Recommended ;)
 	"saslauth"; -- Authentication for clients and servers. Recommended if you want to log in.
@@ -26,6 +26,8 @@ modules_enabled = {
 -- to disable them then uncomment them here:
 modules_disabled = {
 };
+certificates = "certs"
+plugin_paths = { "/usr/share/jitsi-meet/prosody-plugins/" }
 
 interfaces = { "127.0.0.1", "::1" }
 allow_registration = false;
@@ -44,7 +46,11 @@ log = {
 
 VirtualHost "{{ DOMAIN }}"
         -- enabled = false -- Remove this line to enable this host
-        authentication = "anonymous"
+        -- authentication = "anonymous" -- not work ! use "memory"
+	authentication = "{{ AUTH_TYPE }}";	-- comment to disable token
+        app_id = "{{ JWT_APP_ID }}";          	-- application identifier
+        app_secret = "{{ JWT_APP_SECRET }}";   	-- application secret known only to your token
+        allow_empty_token = false;      -- tokens are verified only if they are supplied by the client
         modules_enabled = {
             "bosh";
             "pubsub";
@@ -54,8 +60,10 @@ VirtualHost "{{ DOMAIN }}"
         c2s_require_encryption = false
 
 Component "conference.{{ DOMAIN }}" "muc"
-    storage = "null"
-    --modules_enabled = { "token_verification" }
+    storage = "memory"
+    modules_enabled = { "token_verification";
+			"presence_identity";
+			"token_moderation"; }
 
 Component "jitsi-videobridge.{{ DOMAIN }}"
     component_secret = "{{ JVB_SECRET }}"
