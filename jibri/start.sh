@@ -20,20 +20,25 @@ export LOCAL_IP=`ip route get 1 | head -1 | cut -d' ' -f7`
 
 # Substitute configuration
 for VARIABLE in `env | cut -f1 -d=`; do
-  sed -i "s={{ $VARIABLE }}=${!VARIABLE}=g" /etc/jitsi/*/* /etc/nginx/nginx.conf /etc/prosody/prosody.cfg.lua
+  sed -i "s={{ $VARIABLE }}=${!VARIABLE}=g" /etc/jitsi/*/* 
 done
 
-/etc/init.d/prosody restart
+#/etc/init.d/prosody restart
 #hack prosody 11
-prosodyctl unregister focus "auth.$DOMAIN" 
-prosodyctl register focus "auth.$DOMAIN" $FOCUS_SECRET
-prosodyctl register jibri auth.$DOMAIN $JIBRI_PASSWORD
-prosodyctl register recorder recorder.$DOMAIN $JIBRI_PASSWORD2
+#prosodyctl unregister focus 
+#prosodyctl register focus "auth.$DOMAIN" $FOCUS_SECRET
+#prosodyctl register jibri auth.$DOMAIN $JIBRI_AUTH
+#prosodyctl register recorder recorder.$DOMAIN $JIBRI_SECRET
 
 fi
 
 # TODO: improve process management
-/etc/init.d/prosody restart
-/etc/init.d/jicofo restart
-/etc/init.d/jitsi-videobridge restart
-exec nginx -g 'daemon off;'
+#/etc/init.d/prosody restart
+#/etc/init.d/jicofo restart
+#/etc/init.d/jitsi-videobridge restart
+#/etc/init.d/jibri restart
+
+
+#exec nginx -g 'daemon off;'
+#exec tail -f /var/log/jitsi/jibri/*
+exec /opt/jitsi/jibri/launch.sh

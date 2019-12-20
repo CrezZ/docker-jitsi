@@ -151,6 +151,10 @@ var config = {
 
     // Recording
 
+fileRecordingsEnabled: true, // If you want to enable file recording
+liveStreamingEnabled: true, // If you want to enable live streaming
+hiddenDomain: 'recorder.{{ DOMAIN }}',
+
     // Whether to enable file recording or not.
     // fileRecordingsEnabled: false,
     // Enable the dropbox integration.

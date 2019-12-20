@@ -29,7 +29,7 @@ modules_disabled = {
 certificates = "certs"
 plugin_paths = { "/usr/share/jitsi-meet/prosody-plugins/" }
 
-interfaces = { "127.0.0.1", "::1" }
+interfaces = { "*" }
 allow_registration = false;
 daemonize = true;
 pidfile = "/var/run/prosody/prosody.pid";
@@ -73,3 +73,17 @@ VirtualHost "auth.{{ DOMAIN }}"
 
 Component "focus.{{ DOMAIN }}"
     component_secret = "{{ JICOFO_SECRET }}"
+
+-- internal muc component, meant to enable pools of jibri and jigasi clients
+Component "internal.auth.{{ DOMAIN }}" "muc"
+    modules_enabled = {
+      "ping";
+    }
+    storage = "null"
+    muc_room_cache_size = 1000
+
+VirtualHost "recorder.{{ DOMAIN }}"
+  modules_enabled = {
+    "ping";
+  }
+  authentication = "internal_plain"

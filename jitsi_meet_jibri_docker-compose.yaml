@@ -1,0 +1,33 @@
+version: '3'
+services:
+  jitsi:
+    image: jitsi2
+    ports:
+      - 80:80
+      - 4443:4443
+      - 10000:10000/udp
+    environment:
+      - DOMAIN=mcu.myserver.ru
+      - BRIDGE_IP=77.88.11.22
+      - STUN=stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302
+      - JVB_STUN_SERVERS=stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302
+      - JWT_APP_ID=docker_jitsi
+      - JWT_APP_SECRET=docker_jitsi_secret
+      - JS_LANG=en
+      - JS_ENABLE_TOKEN=false
+      - AUTH_TYPE=token
+      - JIBRI_PASSWORD=token
+      - AUTH_TYPE=token
+      - AUTH_TYPE=token
+  jibri:
+    image: jibri2
+    environment:
+      - DOMAIN=mcu.myserver.ru
+      - BRIDGE_IP=77.88.11.22
+      - STUN=stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302
+      - JVB_STUN_SERVERS=stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302
+      - JIBRI_AUTH='123123123123'
+      - JIBRI_SECRET='321321321321'
+      - PROSODY_HOST=localhost 
+      - JIBRI_DOMAIN=
+      - RECORD_PATH

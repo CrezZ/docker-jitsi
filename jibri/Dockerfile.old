@@ -59,7 +59,6 @@ RUN chown -R jicofo: /etc/jitsi/jicofo \
 
 COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/prosody.cfg.lua /etc/prosody/prosody.cfg.lua
-COPY config/interface_config.js /usr/share/jitsi-meet/interface_config.js
 
 COPY start.sh /start.sh
 
