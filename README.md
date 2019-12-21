@@ -9,6 +9,7 @@ CHANGES:
 - add STUN for jvb
 - enable tokens and stun in config.js
 - add settings for config.js in ENV
+- add JIBRI support (https://github.com/CrezZ/docker-jibri) - Warning! RAM > 2Gb Required to correct working JIBRI+jitsi
 
 Jitsi Meet is an audio/video conferencing software based on XMPP, Jitsi
 Videobridge and lots of great sofware, available at
@@ -219,6 +220,59 @@ document.getElementById('t').value=JWT;
 3 This code you need to use as 'jwt' GET parameter
 ```
 http://mcu.youdomain.ru/roomid?jwt=eyJraWQiOiJqaXRzaS9jdXN0b21fa2V5X25hbWUiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250ZXh0Ijp7InVzZXIiOnsiYXZhdGFyIjoiaHR0cHM6L2dyYXZhdGFyLmNvbS9hdmF0YXIvYWJjMTIzIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqZG9lQGV4YW1wbGUuY29tIiwiaWQiOiJhYmNkOmExYjJjMy1kNGU1ZjYtMGFiYzEtMjNkZS1hYmNkZWYwMWZlZGNiYSJ9LCJncm91cCI6ImExMjMtMTIzLTQ1Ni03ODkifSwiYXVkIjoiaml0c2kiLCJpc3MiOiJKV1RfQVBQX0lEIiwic3ViIjoiRE9NQUlOIiwicm9vbSI6IioiLCJleHAiOjE1NzY2NTQ1NTg4NzIsIm1vZGVyYXRvciI6dHJ1ZX0.vdxvmKznuIQsaP_PhV076LnpDFeQ-AK5GSMV2PXxqgc
+```
+
+#RECORD
+
+For record using JIBRI. This is headless Chrome with selenium driver, which hidden view all participants and record any flows. It required at least 256 Mb RAM.
+
+
+If you want to run JIBRI on a separate host, port 5222 from JITSI needs to be expose:
+ ports:
+    - 5222:5222
+Don`t forget protect this port by iptables.
+
+Standart docker start for JIBRI
+```
+docker run -e JIBRI_DOMAIN='mcu.youserver.ru' -e JIBRI_SECRET='321321321321' -e JIBRI_AUTH='123123123123' -e PROSODY_HOST=my.jitsi.host.or.docker.name  crezz/docker-jibri-2019
+```
+
+or via docker compose
+1 Other host
+
+```
+version: '3'
+services:
+  jibri:
+    image: crezz/docker-jibri-2019
+    environment:
+      - JIBRI_AUTH='123123123123'
+      - JIBRI_SECRET='123123123123'
+      - PROSODY_HOST=my.jitsi.host.or.docker.name
+      - JIBRI_DOMAIN=mcu.myserver.ru
+      - RECORD_PATH=/tmp/record
+    volumes:
+      - /tmp:/tmp/record
+
+```
+
+
+#RUN JIBRI and JITSI on single host
+
+It required >2Gb RAM!
+
+https://gitsub.com/crezz/docker-jibri
+
+#CORS error prevent
+
+If you browser get CORS error like this "" or this "" you need add to nginx this lines to location / and location /http-bind
+
+```
+location /http-bind {
+ add_header 'Access-Control-Allow-Origin' '*';
+ add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
+...
+}
 ```
 
 

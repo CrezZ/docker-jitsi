@@ -1,4 +1,0 @@
-#!/bin/sh
-
-#PATCH for headless chrome without recompile jibri
-/etc/alternatives/google-chrome --headless --disable-setuid-sandbox --no-sandbox --disable-dev-shm-usage --no-zygote  "$@"

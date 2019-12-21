@@ -79,7 +79,7 @@ Component "internal.auth.{{ DOMAIN }}" "muc"
     modules_enabled = {
       "ping";
     }
-    storage = "null"
+    storage = "memory"
     muc_room_cache_size = 1000
 
 VirtualHost "recorder.{{ DOMAIN }}"

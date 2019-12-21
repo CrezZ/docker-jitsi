@@ -6,6 +6,7 @@ services:
       - 80:80
       - 4443:4443
       - 10000:10000/udp
+      - 5222:5222
     environment:
       - DOMAIN=mcu.myserver.ru
       - BRIDGE_IP=77.88.11.22

@@ -7,6 +7,7 @@ var config = {
 
     hosts: {
         domain: '{{ DOMAIN }}',
+	anonymousdomain:'record.{{ DOMAIN }}', //FOR jibri+JWT
         muc: 'conference.{{ DOMAIN }}', // FIXME: use XEP-0030
         focus: 'focus.{{ DOMAIN }}', // defaults to 'focus.ok'
         bridge: 'jitsi-videobridge.{{ DOMAIN }}',
